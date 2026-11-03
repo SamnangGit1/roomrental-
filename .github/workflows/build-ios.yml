@@ -29,16 +29,26 @@ jobs:
       - name: Build unsigned iOS app
         run: flutter build ios --release --no-codesign
 
-      - name: Package app
+      - name: Build iOS Simulator app
+        run: flutter build ios --simulator --release
+
+      - name: Package iPhone app
         run: |
           mkdir -p dist/Payload
           cp -R build/ios/iphoneos/Runner.app dist/Payload/Runner.app
           cd dist
-          zip -r ../roomrental-ios-unsigned.zip Payload
+          zip -r ../roomrental-ios-device.zip Payload
 
-      - name: Upload iOS app artifact
+      - name: Package Appetize simulator app
+        run: |
+          cd build/ios/iphonesimulator
+          zip -r ../../../roomrental-ios-simulator.zip Runner.app
+
+      - name: Upload iOS artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: roomrental-ios-unsigned
-          path: roomrental-ios-unsigned.zip
+          name: roomrental-ios-builds
+          path: |
+            roomrental-ios-device.zip
+            roomrental-ios-simulator.zip
           if-no-files-found: error
