@@ -1,6 +1,16 @@
 # roomrental_app
 
-A new Flutter project.
+## Build the iOS app from Windows
+
+This project includes a GitHub Actions workflow that uses a macOS runner to
+build the Flutter iOS app. From GitHub, open **Actions → Build iOS app →
+Run workflow**. When the run finishes, download the
+`roomrental-ios-unsigned` artifact.
+
+The downloaded `roomrental-ios-unsigned.zip` contains `Payload/Runner.app`.
+It is unsigned, so it cannot be installed directly on an iPhone. App Store,
+TestFlight, or device installation requires Apple Developer signing
+certificates and provisioning profiles.
 
 ## Getting Started
 
